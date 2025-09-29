@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLAM QUARTERS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink: #ff3e8f;
+      --black: #111;
+      --white: #fff;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { background:var(--black); color:var(--white); line-height:1.6; scroll-behavior:smooth; }
+    
+    /* HEADER */
+    header {
+      position:fixed; top:0; left:0; width:100%;
+      background:rgba(17,17,17,0.9); padding:15px 25px;
+      display:flex; justify-content:space-between; align-items:center;
+      z-index:1000; box-shadow:0 4px 10px rgba(0,0,0,0.6);
+    }
+    header h1 { color:var(--pink); font-size:1.4rem; text-shadow:0 0 10px var(--pink); }
+    nav { display:none; }
+    nav.active { display:block; position:absolute; top:60px; right:20px; background:var(--black); padding:15px; border-radius:8px; }
+    nav a { display:block; margin:10px 0; color:var(--white); text-decoration:none; transition:0.3s; }
+    nav a:hover { color:var(--pink); text-shadow:0 0 8px var(--pink); }
+    .menu { font-size:1.8rem; cursor:pointer; color:var(--pink); }
+
+    /* HERO */
+    .hero {
+      height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center;
+      text-align:center; background:url('/images/glam1.jpg') center/cover no-repeat;
+      position:relative; color:var(--white);
+    }
+    .hero::before {
+      content:""; position:absolute; top:0; left:0; width:100%; height:100%;
+      background:linear-gradient(135deg, rgba(255,62,143,0.6), rgba(17,17,17,0.8));
+      z-index:0;
+    }
+    .hero h2, .hero p, .hero a { position:relative; z-index:1; }
+    .hero h2 { font-size:2.5rem; margin-bottom:15px; text-shadow:0 0 12px var(--pink); }
+    .hero p { margin-bottom:20px; font-size:1.1rem; }
+    .btn {
+      background:var(--pink); color:var(--white); padding:12px 25px; border:none;
+      border-radius:25px; font-weight:bold; cursor:pointer; transition:0.3s; box-shadow:0 0 15px var(--pink);
+    }
+    .btn:hover { transform:scale(1.05); }
+
+    /* SECTION */
+    section { padding:80px 20px; max-width:1000px; margin:auto; }
+    section h2 { text-align:center; color:var(--pink); margin-bottom:25px; text-shadow:0 0 10px var(--pink); }
+
+    /* SERVICES */
+    .services { display:grid; grid-template-columns:1fr; gap:20px; }
+    .card {
+      background:#1a1a1a; padding:20px; border-radius:10px;
+      text-align:center; transform:translateY(50px); opacity:0; transition:0.8s;
+      box-shadow:0 0 15px rgba(255,62,143,0.3);
+    }
+    .card.visible { transform:translateY(0); opacity:1; }
+    .card h3 { color:var(--pink); margin-bottom:10px; text-shadow:0 0 8px var(--pink); }
+
+    /* GALLERY */
+    .gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+    .gallery img { width:100%; border-radius:8px; cursor:pointer; transition:0.3s; box-shadow:0 0 10px rgba(0,0,0,0.6); }
+    .gallery img:hover { transform:scale(1.05); }
+
+    /* Modal */
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; }
+    .modal img { max-width:90%; border-radius:8px; box-shadow:0 0 20px var(--pink); }
+    .modal.active { display:flex; }
+
+    /* CONTACT + BOOKING */
+    .contact iframe { width:100%; height:300px; border:0; border-radius:10px; margin-top:15px; }
+    .book { background:#1a1a1a; padding:25px; border-radius:12px; box-shadow:0 0 15px rgba(255,62,143,0.4); }
+    .book form { display:flex; flex-direction:column; gap:15px; }
+    .book input, .book textarea, .book select {
+      padding:12px; border:none; border-radius:8px;
+    }
+    .book button { background:var(--pink); color:var(--white); padding:12px; border:none; border-radius:25px; font-weight:bold; cursor:pointer; box-shadow:0 0 12px var(--pink); }
+    .book button:hover { transform:scale(1.05); }
+
+    footer { text-align:center; padding:20px; background:#1a1a1a; box-shadow:0 -3px 10px rgba(0,0,0,0.6); }
+    footer p { font-size:0.9rem; color:#bbb; }
+
+    @media(min-width:768px){
+      .services { grid-template-columns:repeat(3,1fr); }
+      nav { display:flex!important; position:static; background:none; padding:0; }
+      nav a { margin:0 15px; }
+      .menu { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>GLAM QUARTERS</h1>
+  <div class="menu">&#9776;</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#book">Book</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <h2>Your Beauty, Our Passion</h2>
+  <p>Braids • Wigs • Nails • Jewelry • Feminine Glow</p>
+  <a href="#services"><button class="btn">Explore Services</button></a>
+</section>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>At <b>GLAM QUARTERS</b>, we specialize in braids, wigs, pedicures, manicures, nails, tattoo stickers, jewelry and everything that enhances feminine beauty. Visit us at Lashibi, Spintex and let’s glam you up!</p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="card"><h3>Braids</h3><p>Trendy styles tailored for you.</p></div>
+    <div class="card"><h3>Wigs</h3><p>Quality wigs to match every occasion.</p></div>
+    <div class="card"><h3>Nails</h3><p>Fixing, pedicure & manicure with finesse.</p></div>
+    <div class="card"><h3>Jewelry</h3><p>Shiny, stylish & affordable accessories.</p></div>
+    <div class="card"><h3>Tattoo Stickers</h3><p>Trendy designs for a bold statement.</p></div>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <img src="/images/glambraids.jpg" alt="Braids">
+    <img src="/images/glamnails.jpg" alt="Wigs">
+    <img src="/images/glamwigs.jpg" alt="Nails">
+    <img src="/images/glamjewels.jpg" alt="Jewelry">
+    <img src="/images/glamtats.jpg" alt="Tattoo">
+  </div>
+</section>
+
+<section id="book">
+  <h2>Book a Session</h2>
+  <div class="book">
+    <form id="bookingForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <select id="service" required>
+        <option value="">Select Service</option>
+        <option>Braids</option>
+        <option>Wigs</option>
+        <option>Nails</option>
+        <option>Jewelry</option>
+        <option>Tattoo Stickers</option>
+      </select>
+      <input type="date" id="date" required>
+      <textarea id="message" rows="3" placeholder="Extra details"></textarea>
+      <button type="submit">Book Now</button>
+    </form>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <p><b>Phone:</b> <a href="tel:+233577233628" style="color:var(--pink)">+233 57 723 3628</a></p>
+  <p><b>Location:</b> Lashibi, Spintex</p>
+  <iframe src="https://www.google.com/maps?q=Lashibi,Spintex,Ghana&output=embed"></iframe>
+</section>
+
+<footer>
+  <p>© 2025 GLAM QUARTERS. All rights reserved.</p>
+</footer>
+
+<script>
+  // Toggle menu
+  const menu=document.querySelector('.menu');
+  const nav=document.querySelector('nav');
+  menu.addEventListener('click',()=>nav.classList.toggle('active'));
+
+  // Scroll animations
+  const cards=document.querySelectorAll('.card');
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.2});
+  cards.forEach(card=>observer.observe(card));
+
+  // Gallery modal
+  const gallery=document.querySelectorAll('.gallery img');
+  const modal=document.createElement('div');
+  modal.className='modal';
+  modal.innerHTML='<img src="" alt="preview">';
+  document.body.appendChild(modal);
+  const modalImg=modal.querySelector('img');
+  gallery.forEach(img=>{
+    img.addEventListener('click',()=>{
+      modalImg.src=img.src;
+      modal.classList.add('active');
+    });
+  });
+  modal.addEventListener('click',()=>modal.classList.remove('active'));
+
+  // Booking form -> WhatsApp
+  document.getElementById('bookingForm').addEventListener('submit',function(e){
+    e.preventDefault();
+    const name=document.getElementById('name').value;
+    const service=document.getElementById('service').value;
+    const date=document.getElementById('date').value;
+    const msg=document.getElementById('message').value;
+    const whatsapp=`https://wa.me/233577233628?text=Hello%20GLAM%20QUARTERS!%0AName:%20${name}%0AService:%20${service}%0ADate:%20${date}%0ADetails:%20${msg}`;
+    window.open(whatsapp,'_blank');
+  });
+</script>
+
+</body>
+</html>
